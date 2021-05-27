@@ -1,0 +1,20 @@
+{* This is the welcome page, you can delete it *}
+
+{block content}
+<div id="banner">
+    <h1 n:block=title>jidelnicek</h1>
+
+</div>
+
+<div id="content">
+    <p>{$restaurant[0]->date}</p>
+    {foreach $restaurant[0]->courses as $course}
+        <h2>{$course->course}</h2>
+
+        {foreach $course->meals as $meal}
+            <p>{$meal->name} {$meal->price},-</p>
+
+        {/foreach}
+    {/foreach}
+
+</div>

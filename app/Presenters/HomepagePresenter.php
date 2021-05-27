@@ -14,4 +14,10 @@ final class HomepagePresenter extends Nette\Application\UI\Presenter
         $this->template->restaurants = json_decode(file_get_contents("https://private-anon-0c1a8771f3-idcrestaurant.apiary-mock.com/restaurant"));
 
     }
+
+
+    public function renderDetail($id)
+    {
+        $this->template->restaurant = json_decode(file_get_contents("https://private-anon-0c1a8771f3-idcrestaurant.apiary-mock.com/daily-menu?restaurant_id=$id"));
+    }
 }

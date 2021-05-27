@@ -10,9 +10,9 @@
 
 	{foreach $restaurants as $restaurant}
 		<div class="restaurant">
-			<div><a href="{$restaurant->url}"> {$restaurant->name}</a>></div>
+			<div><a href="{$restaurant->url}"> {$restaurant->name}</a></div>
 			<p>{$restaurant->address}</p>
-
+			<p><a n:href="Homepage:detail $restaurant->id">jidelnicek</a></p>
 
 
 		</div>
