@@ -4,20 +4,32 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
+use App\Models\Restaurant;
 use Nette;
 
 
 final class HomepagePresenter extends Nette\Application\UI\Presenter
 {
-    public function renderDefault()
+    /** @var Restaurant */
+    private $restaurant;
+
+  /**
+   * HomepagePresenter constructor.
+   * @param Restaurant $restaurant
+   */
+  public function __construct(Restaurant $restaurant) {
+    $this->restaurant = $restaurant;
+  }
+
+  public function renderDefault()
     {
-        $this->template->restaurants = json_decode(file_get_contents("https://private-anon-0c1a8771f3-idcrestaurant.apiary-mock.com/restaurant"));
+        $this->template->restaurants = $this->restaurant->getRestaurantList();
 
     }
 
 
-    public function renderDetail($id)
+    public function renderDetail(int $id)
     {
-        $this->template->restaurant = json_decode(file_get_contents("https://private-anon-0c1a8771f3-idcrestaurant.apiary-mock.com/daily-menu?restaurant_id=$id"));
+        $this->template->restaurant = $this->restaurant->getMenuList($id);
     }
 }

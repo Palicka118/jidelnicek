@@ -1,20 +1,35 @@
 {* This is the welcome page, you can delete it *}
 
 {block content}
-<div id="banner">
-    <h1 n:block=title>jidelnicek</h1>
+<div class="container text-center">
+    <h1 n:block=title>Jídelníček</h1>
 
 </div>
 
-<div id="content">
-    <p>{$restaurant[0]->date}</p>
-    {foreach $restaurant[0]->courses as $course}
-        <h2>{$course->course}</h2>
+<div class="container">
+    <ul class="nav nav-tabs">
+        {foreach $restaurant as $menu}
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab{$menu->date}">{$menu->date|date:'j. n. Y'}</button>
+            </li>
+        {/foreach}
+    </ul>
 
-        {foreach $course->meals as $meal}
-            <p>{$meal->name} {$meal->price},-</p>
+    <div class="tab-content">
+        {foreach $restaurant as $menu}
+            <div id="tab{$menu->date}" class="tab-pane fade">
+                {foreach $menu->courses as $course}
+                    <h2>{$course->course}</h2>
+                    {foreach $course->meals as $meal}
+                        <div class="row"><div class="col-9 col-sm-6 col-md-3">{$meal->name}</div><div class="col-1">{if $meal->price}{$meal->price},-{/if}</div></div>
+
+                    {/foreach}
+
+                {/foreach}
+
+            </div>
 
         {/foreach}
-    {/foreach}
+    </div>
 
 </div>
